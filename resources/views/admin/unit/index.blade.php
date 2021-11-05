@@ -15,8 +15,9 @@
 @endif
 
 <div class="card">
-  <div class="card-header mb-2">
+  <div class="card-header mb-2 justify-content-between">
     <h3 class="card-title">List Unit</h3>
+    <a href="{{ route('unit.create') }}" class="btn btn-success">Tambah data</a>
   </div>
   <div class="table-responsive">
     <table id="table_1" class="table card-table table-vcenter text-nowrap datatable">
@@ -44,7 +45,7 @@
             <td>
               {{ $item->kepala_sekolah }}
             </td>
-            <td class="text-end">
+            <td >
               <a href="{{ route('unit.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
               <form class="d-inline" action="{{ route('unit.destroy', $item->id) }}" method="POST">
                 @csrf

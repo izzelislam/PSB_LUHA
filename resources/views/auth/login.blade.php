@@ -25,7 +25,14 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
         @endif
+        @if (session('sukses'))
+          <div class="alert alert-success alert-dismissible fade show bg-success text-light" role="alert">
+            {{ session('sukses') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        @endif
         <form class="card card-md" action="{{ route('login-proses') }}" method="POST" autocomplete="off">
+          @csrf
           <div class="card-body">
             <div class="text-center mb-4">
               <a href="."><img src="{{ asset('assets/img/favicon.png ') }}" style="height: 100px; width: 100px;" alt=""></a>
@@ -33,7 +40,7 @@
             <h2 class="card-title text-center mb-4">Masuk ke akun anda</h2>
             <div class="mb-3">
               <label class="form-label">No Telepon</label>
-              <input type="email" class="form-control" placeholder="Enter email">
+              <input type="text" name="no_telepon" class="form-control" placeholder="08521157691">
             </div>
             <div class="mb-2">
               <label class="form-label">
@@ -43,7 +50,7 @@
                 </span>
               </label>
               <div class="input-group input-group-flat">
-                <input type="password" class="form-control"  placeholder="Password"  autocomplete="off">
+                <input type="password" name="password" class="form-control"  placeholder="Password"  autocomplete="off">
             </div>
             <div class="mb-2">
               <label class="form-check">
@@ -55,7 +62,7 @@
               <button type="submit" class="btn btn-success w-100">Masuk</button>
               <div class="mt-3">
                 <small>Belum punya akun sebelumnya?</small>
-                <button type="submit" class="btn btn-dark w-100 mt-1">Daftar</button>
+                <a href="{{ route('register') }}" class="btn btn-dark w-100 mt-1">Daftar</a>
               </div>
             </div>
           </div>

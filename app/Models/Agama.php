@@ -12,4 +12,14 @@ class Agama extends Model
     protected $table = "agama";
 
     protected $fillable = ["nama"];
+
+    public function ayah()
+    {
+        return $this->hasMany(Ayah::class, 'agama_id', 'id');
+    }
+
+    public function ibu()
+    {
+        return $this->hasMany(Ibu::class, 'agama_id', 'id');
+    }
 }

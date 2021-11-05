@@ -17,7 +17,7 @@
       </div>
       <div>
         <a class="btn btn-info" href="{{ url()->previous() }}">Kembali</a>
-        <button type="submit" class="btn btn-primary">buat data</button>
+        <button type="submit" class="btn btn-success">buat data</button>
       </div>
     </form>
   </div>

@@ -17,7 +17,7 @@
 <div class="card">
   <div class="card-header mb-2 justify-content-between">
     <h3 class="card-title">List Agama</h3>
-    <a href="{{ route('grup-whatsapp.create') }}" class="btn btn-primary">Tambah data</a>
+    <a href="{{ route('grup-whatsapp.create') }}" class="btn btn-success">Tambah data</a>
   </div>
   <div class="table-responsive">
     <table id="table_1" class="table card-table table-vcenter text-nowrap datatable">
@@ -41,7 +41,7 @@
             <td>
               {{ $item->link }}
             </td>
-            <td class="text-end">
+            <td>
               <a href="{{ route('grup-whatsapp.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
               <form class="d-inline" action="{{ route('grup-whatsapp.destroy', $item->id) }}" method="POST">
                 @csrf

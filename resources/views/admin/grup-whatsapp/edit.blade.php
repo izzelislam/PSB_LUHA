@@ -18,7 +18,7 @@
       </div>
       <div>
         <a class="btn btn-info" href="{{ url()->previous() }}">Kembali</a>
-        <button type="submit" class="btn btn-primary">Edit data</button>
+        <button type="submit" class="btn btn-success">Edit data</button>
       </div>
     </form>
   </div>

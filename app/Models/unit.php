@@ -12,4 +12,9 @@ class unit extends Model
     protected $table= "unit";
 
     protected $fillable= ['kode', 'nama', 'kepala_sekolah'];
+
+    public function biodata()
+    {
+        return $this->hasMany(Biodata::class, 'unit_id', 'id');
+    }
 }

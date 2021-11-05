@@ -21,6 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'no_telepon',
+        'role',
+        'gambar'
     ];
 
     /**
@@ -41,4 +44,39 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function pembayaran()
+    {
+        return $this->hasOne(Pembayaran::class, 'users_id', 'id');
+    }
+
+    public function biodata()
+    {
+        return $this->hasOne(Biodata::class, 'users_id', 'id');
+    }
+
+    public function ayah()
+    {
+        return $this->hasOne(Ayah::class, 'users_id', 'id');
+    }
+
+    public function ibu()
+    {
+        return $this->hasOne(Ibu::class, 'users_id', 'id');
+    }
+
+    public function wali()
+    {
+        return $this->hasOne(Wali::class, 'users_id', 'id');
+    }
+
+    public function saudara()
+    {
+        return $this->hasMany(Saudara::class, 'users_id', 'id');
+    }
+
+    public function document()
+    {
+        return $this->hasOne(Document::class, 'users_id', 'id');
+    }
 }
