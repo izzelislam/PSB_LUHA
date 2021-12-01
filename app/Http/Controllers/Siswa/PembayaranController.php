@@ -21,22 +21,18 @@ class PembayaranController extends Controller
             $stored = $this->uploadFile($gambar);
             
             if(isset($prev)){
-				if (isset($user_id)){
+				if (isset($prev->gambar)){
 					$this->deleteFile($prev->gambar);
 					$prev->update(['gambar' => $stored]);				
 				}else {
-					dd('not athorized ');
-				}
-            }else {
-				if (isset($user_id)){
 					Pembayaran::create([
 						'users_id' => $user_id,
 						'gambar'   => $stored,
 						'status'   => 'belum-lunas'
-					]);					
-				}else {
-					dd('not athorized ');
+					]);
 				}
+            }else {
+                dd('not athorized ');
             }
 
 

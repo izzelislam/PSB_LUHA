@@ -1,43 +1,50 @@
-@extends('admin.layouts.app')
+@extends('admin.includes.app')
 
-@section('page-title', 'Tambah User')
+@section('page-title', $title.'Akun')
   
 @section('content')
-<div class="card">
-  @if ($errors->any())
-    <div class="alert alert-danger alert-dismissible fade show bg-danger text-light">
-      <ul>
-        @foreach ($errors->all() as $error)
-          <li>{{ $error }}</li>
-        @endforeach
-      </ul>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+  <x-card title="{{ $title.' '.'Akun' }}">
+    <div class="col-md-8">
+      <form action="{{ $submit_url }}" method="POST">
+        @isset($model)
+            @method('PUT')
+        @endisset
+        @csrf
+          <x-form-input
+            label="Nama"
+            name="name"
+            class="mb-4"
+            value="{{ $model->name ?? null }}"
+          />
+
+          <x-form-input
+            label="Email"
+            type="email"
+            name="email"
+            class="mb-4"
+            value="{{ $model->email ?? null }}"
+          />
+
+          <x-form-input
+            label="No telepon"
+            name="no_telepon"
+            class="mb-4"
+            value="{{ $model->no_telepon ?? null }}"
+          />
+
+          <x-form-input
+            label="password"
+            name="password"
+            type="password"
+            class="mb-4"
+            value=""
+          />
+
+
+          <button class="btn btn-primary">Buat Data</button>
+      </form>
     </div>
-  @endif
-  <div class="card-body">
-    <form action="{{ route('user.store') }}" method="POST">
-      @csrf
-      <div class="mb-3">
-        <label class="form-label">Nama</label>
-        <input type="text" class="form-control" name="name" required>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Email</label>
-        <input type="email" class="form-control" name="email" required>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">No Telepon</label>
-        <input type="number" class="form-control" name="no_telepon" required>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">password</label>
-        <input type="password" class="form-control" name="password" required>
-      </div>
-      <div>
-        <a class="btn btn-info" href="{{ url()->previous() }}">Kembali</a>
-        <button type="submit" class="btn btn-success">buat data</button>
-      </div>
-    </form>
-  </div>
-</div>
+  </x-card>
+
 @endsection

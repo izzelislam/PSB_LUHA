@@ -1,29 +1,40 @@
-@extends('admin.layouts.app')
+@extends('admin.includes.app')
 
-@section('page-title', 'Tambah Unit')
+@section('page-title', $title.'Unit')
   
 @section('content')
-<div class="card">
-  <div class="card-body">
-    <form action="{{ route('unit.store') }}" method="POST">
-      @csrf
-      <div class="mb-3">
-        <label class="form-label">Kode</label>
-        <input type="text" class="form-control" name="kode" placeholder="SMA-0120" required>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Nama</label>
-        <input type="text" class="form-control" name="nama" placeholder="SMP (sekolah menengah pertama)" required>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Kepala Sekolah</label>
-        <input type="text" class="form-control" name="kepala_sekolah" placeholder="Budi Santoso" required>
-      </div>
-      <div>
-        <a class="btn btn-info" href="{{ route('unit.index') }}">Kembali</a>
-        <button type="submit" class="btn btn-success">buat data</button>
-      </div>
-    </form>
-  </div>
-</div>
+
+  <x-card title="{{ $title.' '. 'Unit' }}">
+    <div class="col-md-8">
+      <form action="{{ $submit_url }}" method="POST">
+        @isset($model)
+            @method('PUT')
+        @endisset
+        @csrf
+          <x-form-input
+            label="Kode"
+            name="kode"
+            class="mb-4"
+            value="{{ $model->kode ?? null }}"
+          />
+
+          <x-form-input
+            label="Nama"
+            name="nama"
+            class="mb-4"
+            value="{{ $model->nama ?? null }}"
+          />
+
+          <x-form-input
+            label="Kepala Sekolah"
+            name="kepala_sekolah"
+            class="mb-4"
+            value="{{ $model->kepala_sekolah ?? null }}"
+          />
+
+          <button class="btn btn-primary">Buat Data</button>
+      </form>
+    </div>
+  </x-card>
+
 @endsection

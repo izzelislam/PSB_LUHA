@@ -25,7 +25,9 @@ class GrupWhatsappController extends Controller
      */
     public function create()
     {
-        return view('admin.grup-whatsapp.create');
+        $data['title'] = 'Buat Grub';
+        $data['submit_url'] = route('grup-whatsapp.store');
+        return view('admin.grup-whatsapp.create', $data);
     }
 
     /**
@@ -60,7 +62,10 @@ class GrupWhatsappController extends Controller
     public function edit($id)
     {
         $wa = GrupWhatsapp::findOrFail($id);
-        return view('admin.grup-whatsapp.edit', compact('wa'));
+        $data['title'] = 'Update Data Grub';
+        $data['submit_url'] = route('grup-whatsapp.update', $id);
+        $data['model'] = $wa;
+        return view('admin.grup-whatsapp.create', $data);
     }
 
     /**

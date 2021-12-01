@@ -25,7 +25,9 @@ class UnitController extends Controller
      */
     public function create()
     {
-        return view('admin.unit.create');
+        $data['title'] = 'Buat Data';
+        $data['submit_url'] = route('unit.store');
+        return view('admin.unit.create', $data);
     }
 
     /**
@@ -60,7 +62,10 @@ class UnitController extends Controller
     public function edit($id)
     {
         $unit = unit::findOrFail($id);
-        return view('admin.unit.edit', compact('unit'));
+        $data['title'] = 'Edit Data';
+        $data['submit_url'] = route('unit.update', $id);
+        $data['model']      = $unit;
+        return view('admin.unit.create', $data);
     }
 
     /**

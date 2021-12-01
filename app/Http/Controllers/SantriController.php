@@ -2,33 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BiodataExport;
 use App\Models\Biodata;
 use App\Models\unit;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class SantriController extends Controller
 {
     public function index()
     {
-        $unit = unit::all();
+        $data['smp'] = Biodata::wherehas('unit', fn($query) => $query->where('nama', 'SMP'))->with(['user', 'unit'])->get();
+        $data['sma'] = Biodata::wherehas('unit', fn($query) => $query->where('nama', 'SMA/ULYA'))->with(['user', 'unit'])->get();
 
-        $first_unit = unit::first();
-        $data = Biodata::with(['user', 'unit']);
-
-        // dd($data);
-
-        if (request('unit_id') == null && count($data->get()) > 0){
-           $data = $data->where('unit_id',$first_unit->id);
-        }
-
-        if (request()->unit_id != null){
-           $data = $data->where('unit_id',request('unit_id'));
-        }
-
-        $data = $data->get();
-
-        return view('admin.calon-santri.index', compact('data', 'unit'));
+        return view('admin.calon-santri.index', $data);
     }
 
     public function show($id)
@@ -38,5 +27,22 @@ class SantriController extends Controller
         ])->first();
 
         return view('admin.calon-santri.detail-santri', compact('biodata'));
+    }
+
+    public function exportExcel()
+    {
+        $data['type'] = request('type');
+        return Excel::download(new BiodataExport($data), 'data calon santri'.$data['type'].'.xlsx');
+    }
+
+    public function exportPdf($id)
+    {
+        
+        $data['biodata'] = User::where('id', $id)->with([
+            'biodata.unit', 'ayah.agama', 'ibu.agama', 'wali', 'saudara'
+        ])->first();
+
+        $pdf = PDF::loadView('admin.calon-santri.export-pdf', $data);
+        return $pdf->stream($data['biodata']->name.'.pdf');
     }
 }

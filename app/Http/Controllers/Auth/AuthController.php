@@ -23,6 +23,11 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
+    public function loginSuperadmin()
+    {
+        return view('auth.login-superadmin');
+    }
+
     public function loginProses(Request $request)
     {
         $credential= $request->only('no_telepon', 'password');
@@ -75,7 +80,13 @@ class AuthController extends Controller
 
     public function logout()
     {
+        $role= Auth::user()->role;
+        $check_role = [
+            'superadmin' => 'login-superadmin',
+            'pendaftar'  => 'login'
+        ];
+
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route($check_role[$role]);
     }
 }

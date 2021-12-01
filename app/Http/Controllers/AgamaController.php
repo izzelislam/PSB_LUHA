@@ -25,7 +25,9 @@ class AgamaController extends Controller
      */
     public function create()
     {
-        return view('admin.agama.create');
+        $data['title'] = 'Buat Data';
+        $data['submit_url'] = route('agama.store');
+        return view('admin.agama.create', $data);
     }
 
     /**
@@ -36,6 +38,10 @@ class AgamaController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nama' => 'required'
+        ]);
+
         Agama::create($request->all());
         return redirect()->route('agama.index')->with('success', 'berhasil tambah data');
     }
@@ -60,7 +66,10 @@ class AgamaController extends Controller
     public function edit($id)
     {
         $agama = Agama::findOrFail($id);
-        return view('admin.agama.edit', compact('agama'));
+        $data['title']  = 'Edit Data';
+        $data['submit_url'] = route('agama.update', $id);
+        $data['model']      = $agama;
+        return view('admin.agama.create',$data);
     }
 
     /**
@@ -72,6 +81,10 @@ class AgamaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'nama' => 'required'
+        ]);
+
         $agama = Agama::findOrFail($id);
         $agama->update($request->all());
         return redirect()->route('agama.index')->with('success', 'Berhasil update data');

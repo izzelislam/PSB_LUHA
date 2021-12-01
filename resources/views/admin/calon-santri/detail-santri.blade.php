@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('admin.includes.app')
 
 @section('page-title', 'Detail calon santri')
   
@@ -166,66 +166,66 @@
       </div>
    </div>
 
-   <div class="row mt-4">
-     @if (isset($biodata->saudara))
-      <div class="col-6">
-        <div class="card">
-          <div class="card-body">
-          <h4>Data Saudara</h4>
-          <table class="table table-borderless mt-3">
-            <tr>
-              <td>No</td>
-              <td>Nama</td>
-              <td>Umur</td>
-              <td>Pendidikan</td>
-            </tr>
-            @if (count($biodata->saudara) > 0)
-              @foreach ($biodata->saudara as $index => $item)
-                <tr>
-                  <td>{{ $index + 1 }}</td>
-                  <td>{{ $item->nama }}</td>
-                  <td>{{ $item->umur }}</td>
-                  <td>{{ $item->pendidikan }}</td>
-                </tr>
-              @endforeach        
-            @endif
-          </table>
-          </div>
-        </div>
-      </div>
-     @else
-      <i>belum ada data yang di tampilkan</i>
-     @endif
    
+  </div>
+  <div class="row mt-4">
+    @if (isset($biodata->saudara))
+     <div class="col-6">
+       <div class="card">
+         <div class="card-body">
+         <h4>Data Saudara</h4>
+         <table class="table table-borderless mt-3">
+           <tr>
+             <td>No</td>
+             <td>Nama</td>
+             <td>Umur</td>
+             <td>Pendidikan</td>
+           </tr>
+           @if (count($biodata->saudara) > 0)
+             @foreach ($biodata->saudara as $index => $item)
+               <tr>
+                 <td>{{ $index + 1 }}</td>
+                 <td>{{ $item->nama }}</td>
+                 <td>{{ $item->umur }}</td>
+                 <td>{{ $item->pendidikan }}</td>
+               </tr>
+             @endforeach        
+           @endif
+         </table>
+         </div>
+       </div>
+     </div>
+    @else
+     <i>belum ada data yang di tampilkan</i>
+    @endif
+  
 
-    <div class="col-6">
-      <div class="card">
-        <div class="card-body">
-          <h4>Data Wali</h4>
-          @if (isset($biodata->wali))
-          <table class="table table-borderless mt-3">
-            <tr>
-              <td width="200px">Nama</td>
-              <td>{{ $biodata->wali->nama }}</td>
-            </tr>
-            <tr>
-              <td width="200px">Alamat</td>
-              <td>{{ $biodata->wali->alamt }}</td>
-            </tr>
-            <tr>
-              <td width="200px">No Telepon</td>
-              <td>{{ $biodata->wali->no_telepon }}</td>
-            </tr>
-          </table>
-          @else
-            <i>belum ada data yang di tampilkan.</i>
-          @endif
-        </div>
-      </div>
-    </div>
-
+   <div class="col-6">
+     <div class="card">
+       <div class="card-body">
+         <h4>Data Wali</h4>
+         @if (isset($biodata->wali))
+         <table class="table table-borderless mt-3">
+           <tr>
+             <td width="200px">Nama</td>
+             <td>{{ $biodata->wali->nama }}</td>
+           </tr>
+           <tr>
+             <td width="200px">Alamat</td>
+             <td>{{ $biodata->wali->alamt }}</td>
+           </tr>
+           <tr>
+             <td width="200px">No Telepon</td>
+             <td>{{ $biodata->wali->no_telepon }}</td>
+           </tr>
+         </table>
+         @else
+           <i>belum ada data yang di tampilkan.</i>
+         @endif
+       </div>
+     </div>
    </div>
 
- </div>
+  </div>
 </div>
 @endsection

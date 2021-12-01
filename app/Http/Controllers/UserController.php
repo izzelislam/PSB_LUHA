@@ -25,8 +25,10 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('admin.user.create');
+    {   
+        $data['title'] = 'Buat';
+        $data['submit_url'] = route('user.store');
+        return view('admin.user.create', $data);
     }
 
     /**
@@ -72,7 +74,10 @@ class UserController extends Controller
     public function edit($id)
     {
        $user = User::findOrFail($id);
-       return view('admin.user.update', compact('user'));
+       $data['title'] = 'Edit';
+       $data['submit_url'] = route('user.update', $id);
+       $data['model'] = $user;
+       return view('admin.user.create', $data);
     }
 
     /**

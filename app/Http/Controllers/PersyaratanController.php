@@ -25,7 +25,9 @@ class PersyaratanController extends Controller
      */
     public function create()
     {
-        return view('admin.persyaratan.create');
+        $data['title'] = 'Buat Data';
+        $data['submit_url'] = route('persyaratan.store');
+        return view('admin.persyaratan.create', $data);
     }
 
     /**
@@ -60,6 +62,9 @@ class PersyaratanController extends Controller
     public function edit($id)
     {
         $persyaratan = Persyaratan::findOrFail($id);
+        $data['title'] = 'Edit Data';
+        $data['submit_url'] = route('persyaratan.update', $id);
+        $data['model'] = $persyaratan;
         return view('admin.persyaratan.edit', compact('persyaratan'));
     }
 

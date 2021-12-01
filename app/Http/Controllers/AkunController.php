@@ -60,7 +60,10 @@ class AkunController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        return view('admin.akun.edit', compact('user'));
+        $data['title'] = 'Edit';
+        $data['model'] =  $user;
+        $data['submit_url'] = route('akun.update', $id);
+        return view('admin.akun.edit', $data);
     }
 
     /**
@@ -72,6 +75,12 @@ class AkunController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'no_telepon' => 'required'
+        ]);
+
         $user = User::findOrFail($id);
 
         if (isset($request->password)){
@@ -97,6 +106,6 @@ class AkunController extends Controller
     public function destroy($id)
     {
         User::findOrFail($id)->delete();
-        return redirect()->route('user.index')->with('success', 'berhasil hapus data');
+        return redirect()->route('akun.index')->with('success', 'berhasil hapus data');
     }
 }

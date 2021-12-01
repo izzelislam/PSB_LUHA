@@ -21,14 +21,13 @@ class RedirectIfAuthenticated
     {
         $guards = empty($guards) ? [null] : $guards;
 
-        $check_role = [
-            'superadmin' => 'usperadmin/home',
-            'pendaftar' => 'pendaftar/home',
-        ];
-
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                 return $check_role(Auth::user()->role);
+                if (Auth::user()->role == 'superadmin'){
+                    return redirect('superadmin/home');
+                }else{
+                    return redirect('pendaftar/home');
+                }
             }
         }
 

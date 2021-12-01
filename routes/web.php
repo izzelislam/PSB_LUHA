@@ -39,6 +39,7 @@ Route::middleware('guest')->get('/', function () {
 
 // auth
 Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/superadmin/login', [AuthController::class, 'loginSuperadmin'])->name('login-superadmin');
 Route::post('/login', [AuthController::class, 'loginProses'])->name('login-proses');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/register', [AuthController::class, 'registerProses'])->name('register-proses');
@@ -66,6 +67,8 @@ Route::group(['prefix' => 'superadmin', 'middleware' => ['auth', 'superAdmin']],
      // santri
      Route::get('/list-calon-santri', [SantriController::class, 'index'])->name('santri.index');
      Route::get('/santri-show/{id}' , [SantriController::class, 'show'])->name('santri.show');
+     Route::get('/santri/export/excel/{type}' , [SantriController::class, 'exportExcel'])->name('santri-export.excel');
+     Route::get('/santri/export/pdf/{id}' , [SantriController::class, 'exportPdf'])->name('santri-export.pdf');
  
      // document
      Route::get('/list-user-dokumen', [DocumentController::class, 'index'])->name('list.dokumen');
